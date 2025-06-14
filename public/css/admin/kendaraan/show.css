@@ -1,0 +1,116 @@
+/* Detail Page Container */
+.detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Page Header */
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.detail-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a365d;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Detail Card */
+.detail-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e2e8f0;
+}
+
+.detail-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.detail-value {
+    color: #475569;
+}
+
+/* Back Button */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    background-color: #64748b;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: #475569;
+    transform: translateY(-1px);
+}
+
+/* Status Badge */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-available {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-diservice {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.status-dipesan {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .detail-container {
+        padding: 1rem;
+    }
+
+    .detail-row {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+
+    .detail-label {
+        font-size: 0.875rem;
+    }
+}

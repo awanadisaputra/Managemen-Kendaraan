@@ -1,0 +1,76 @@
+@extends('sm.layout')
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/sm/bbm.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+@endpush
+
+@section('title', 'Riwayat BBM')
+
+@section('content')
+    <div class="fuel-history-container">
+        <div class="fuel-history-card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-gas-pump"></i>
+                    Riwayat BBM Kendaraan
+                </h1>
+            </div>
+            <div class="card-body">
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <div class="table-wrapper">
+                    <table class="fuel-history-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th><i class="fas fa-calendar-day mr-1"></i> Tanggal</th>
+                                <th><i class="fas fa-car mr-1"></i> Kendaraan</th>
+                                <th><i class="fas fa-oil-can mr-1"></i> Jumlah</th>
+                                <th><i class="fas fa-money-bill-wave mr-1"></i> Biaya</th>
+                                <th><i class="fas fa-tachometer-alt mr-1"></i> KM</th>
+                                <th><i class="fas fa-user-edit mr-1"></i> Dicatat</th>
+                                <th><i class="fas fa-user-plus mr-1"></i> Dibuat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($riwayatBbms as $index => $bbm)
+                                <tr>
+                                    <td>{{ $loop->iteration + ($riwayatBbms->currentPage() - 1) * $riwayatBbms->perPage() }}
+                                    </td>
+                                    <td>{{ \Carbon\Carbon::parse($bbm->tanggal)->format('d M Y') }}</td>
+                                    <td>
+                                        <span class="vehicle-plate">{{ $bbm->kendaraan->nomor_plat ?? '-' }}</span>
+                                    </td>
+                                    <td class="fuel-amount">{{ $bbm->jumlah }} L</td>
+                                    <td class="fuel-cost">Rp{{ number_format($bbm->biaya, 0, ',', '.') }}</td>
+                                    <td class="fuel-mileage">{{ number_format($bbm->km_tercatat) }} KM</td>
+                                    <td>{{ $bbm->dicatatOleh->name ?? '-' }}</td>
+                                    <td>{{ $bbm->dibuatOleh->name ?? '-' }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="empty-state">
+                                        <i class="fas fa-gas-pump"></i>
+                                        <p>Tidak ada data riwayat BBM</p>
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                @if($riwayatBbms->hasPages())
+                    <div class="pagination-wrapper">
+                        {{ $riwayatBbms->onEachSide(1)->links('vendor.pagination.custom') }}
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+@endsection
